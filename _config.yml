@@ -1,1 +1,19 @@
+title: Adrian WEB - Passionate WEB Developer
+author:
+  name: adrianweb
+  email: 
+description: > # this means to ignore newlines until "show_excerpts:"
+  Passionate WEB Developer with experience in: Cloud, Microservices, JAVA, Spring Framework, Elasticsearch.
+show_excerpts: false # set to true to show excerpts on the homepage
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.md
+
+# Build settings
 theme: jekyll-theme-hacker
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
