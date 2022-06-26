@@ -3,7 +3,7 @@ author:
   name: adrianweb
   email: 
 description: > # this means to ignore newlines until "show_excerpts:"
-  Passionate WEB Developer with experience in: 
+  Passionate WEB (AWS Certified) Developer with experience in: 
     Cloud (AWS), Microservices, JAVA, Spring Framework, Elasticsearch, Redis, Docker, ReactJs, DDD... .
 show_excerpts: false # set to true to show excerpts on the homepage
 
