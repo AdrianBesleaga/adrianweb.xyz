@@ -2,8 +2,8 @@
 
 <img src="assets/images/short-cv.png" alt="Adrian Besleaga CV" width="100%"/>
 
-[Linkedin](https://www.linkedin.com/in/adrian-besleaga/)
+<a href="https://www.linkedin.com/in/adrian-besleaga/">Linkedin</a>
 
-[Github](https://github.com/AdrianBesleaga)
+<a href="https://github.com/AdrianBesleaga">Github</a>
 
 </div>
