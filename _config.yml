@@ -4,7 +4,7 @@ author:
   email: 
 description: > # this means to ignore newlines until "show_excerpts:"
   Passionate WEB Developer with experience in: 
-    Cloud (AWS), Microservices, JAVA, Spring Framework, Elasticsearch.
+    Cloud (AWS), Microservices, JAVA, Spring Framework, Elasticsearch, Redis, Docker, ReactJs, DDD... .
 show_excerpts: false # set to true to show excerpts on the homepage
 
 # If you want to link only specific pages in your header, uncomment
