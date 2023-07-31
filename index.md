@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/images/short-cv.png" alt="Adrian Besleaga CV" width="100%"/>
+<img src="assets/images/CV.jpg" alt="Adrian Besleaga CV" width="100%"/>
 
 <a href="https://www.linkedin.com/in/adrian-besleaga/">Linkedin</a>
 
