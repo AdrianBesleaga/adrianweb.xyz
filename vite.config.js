@@ -13,6 +13,9 @@ export default defineConfig({
         '/about',
       ],
       delay: 1000,
+      puppeteer: {
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      },
     }),
   ],
   base: '/',
