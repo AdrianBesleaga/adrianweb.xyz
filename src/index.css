@@ -27,13 +27,15 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
     font-family: var(--font-body);
-    background-color: var(--bg);
+    background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.6;
+    overflow-x: hidden;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -433,6 +435,109 @@ main.container {
     margin-bottom: 2rem;
 }
 
+/* ===== Blog Post Layout ===== */
+.blog-post-layout {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+    width: 100vw;
+    max-width: 1200px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 0 2rem;
+}
+
+.blog-post-layout .blog-post {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ===== Author Sidebar ===== */
+.author-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 6rem;
+}
+
+.author-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.author-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-green);
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+}
+
+.author-name {
+    font-size: 1rem;
+    margin: 0 0 0.25rem;
+    color: var(--text-primary);
+}
+
+.author-role {
+    font-size: 0.8rem;
+    color: var(--accent-green);
+    margin: 0 0 0.75rem;
+    font-weight: 500;
+}
+
+.author-bio {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0 0 1rem;
+}
+
+.author-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.author-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.author-social:hover {
+    background: rgba(86, 211, 100, 0.1);
+    color: var(--accent-green);
+}
+
+.author-social svg {
+    flex-shrink: 0;
+}
+
+.author-about-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--accent-green);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.author-about-link:hover {
+    text-decoration: underline;
+}
+
 /* ===== Blog Post ===== */
 .blog-post .post-header {
     margin-bottom: 2.5rem;
@@ -826,5 +931,94 @@ main.container {
 
     .blog-post .post-header h1 {
         font-size: 1.6rem;
+    }
+
+    .blog-post-layout {
+        flex-direction: column;
+        width: auto;
+        max-width: none;
+        margin-left: 0;
+        transform: none;
+        padding: 0 1rem;
+    }
+
+    .author-sidebar {
+        width: 100%;
+        position: static;
+        order: -1;
+    }
+
+    .author-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .author-avatar {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .author-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .author-role {
+        margin-bottom: 0.25rem;
+    }
+
+    .author-about-link {
+        display: none;
+    }
+
+    .author-links {
+        margin-bottom: 0.5rem;
+        justify-content: flex-start;
+    }
+
+    .profile-picture-small {
+        width: 36px;
+        height: 36px;
+    }
+
+    .about-profile .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Responsive iframes (LinkedIn embeds) */
+    .post-body iframe {
+        width: 100% !important;
+        max-width: 100%;
+    }
+
+    .post-body div[style] {
+        justify-content: center !important;
+    }
+
+    /* Prevent content overflow */
+    .post-body {
+        overflow-x: auto;
+        word-wrap: break-word;
+    }
+
+    .post-body pre {
+        overflow-x: auto;
+    }
+
+    .post-body table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .post-body img {
+        max-width: 100%;
+        height: auto;
     }
 }

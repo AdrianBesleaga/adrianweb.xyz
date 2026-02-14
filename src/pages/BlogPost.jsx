@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import posts from '../data/posts.json'
 import MatrixText from '../components/MatrixText'
+import AuthorSidebar from '../components/AuthorSidebar'
 
 export default function BlogPost() {
     const { slug } = useParams()
@@ -54,46 +55,49 @@ export default function BlogPost() {
         : null
 
     return (
-        <article className="blog-post">
-            <Helmet>
-                <title>{post.title} — Adrian Besleaga</title>
-                <meta name="description" content={post.excerpt} />
-                <meta property="og:title" content={post.title} />
-                <meta property="og:description" content={post.excerpt} />
-                <meta property="og:type" content="article" />
-                <meta property="og:url" content={`https://adrianweb.xyz/blog/${post.slug}`} />
-                <meta property="article:published_time" content={post.date} />
-                <link rel="canonical" href={`https://adrianweb.xyz/blog/${post.slug}`} />
-            </Helmet>
-            <header className="post-header">
-                <Link to="/blog" className="post-back-link">
-                    &larr; Blog
-                </Link>
-                <h1><MatrixText text={post.title} /></h1>
-                <div className="post-meta">
-                    <time>{formatDate(post.date)}</time>
-                    {readingTime && (
-                        <span className="reading-time">
-                            ☕ {readingTime} min read
-                        </span>
-                    )}
-                </div>
-            </header>
+        <div className="blog-post-layout">
+            <article className="blog-post">
+                <Helmet>
+                    <title>{post.title} — Adrian Besleaga</title>
+                    <meta name="description" content={post.excerpt} />
+                    <meta property="og:title" content={post.title} />
+                    <meta property="og:description" content={post.excerpt} />
+                    <meta property="og:type" content="article" />
+                    <meta property="og:url" content={`https://adrianweb.xyz/blog/${post.slug}`} />
+                    <meta property="article:published_time" content={post.date} />
+                    <link rel="canonical" href={`https://adrianweb.xyz/blog/${post.slug}`} />
+                </Helmet>
+                <header className="post-header">
+                    <Link to="/blog" className="post-back-link">
+                        &larr; Blog
+                    </Link>
+                    <h1><MatrixText text={post.title} /></h1>
+                    <div className="post-meta">
+                        <time>{formatDate(post.date)}</time>
+                        {readingTime && (
+                            <span className="reading-time">
+                                ☕ {readingTime} min read
+                            </span>
+                        )}
+                    </div>
+                </header>
 
-            {loading ? (
-                <div className="loading">Loading...</div>
-            ) : (
-                <div className="post-body">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
-                </div>
-            )}
+                {loading ? (
+                    <div className="loading">Loading...</div>
+                ) : (
+                    <div className="post-body">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
+                    </div>
+                )}
 
-            <footer className="post-footer">
-                <Link to="/blog" className="btn btn-outline">
-                    &larr; Back to all posts
-                </Link>
-            </footer>
-        </article>
+                <footer className="post-footer">
+                    <Link to="/blog" className="btn btn-outline">
+                        &larr; Back to all posts
+                    </Link>
+                </footer>
+            </article>
+            <AuthorSidebar />
+        </div>
     )
 }
 

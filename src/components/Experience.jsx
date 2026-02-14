@@ -51,11 +51,24 @@ const experiences = [
     {
         title: 'Java Developer',
         company: 'CGM (CompuGroup Medical)',
-        period: null,
+        period: '2015 – 2019',
         description: 'Java development in the healthcare software industry.',
         highlights: [
             'Java microservices and Elasticsearch',
             'FHIR healthcare interoperability standards',
+        ],
+    },
+    {
+        title: 'Solo Developer & Founder',
+        company: 'Freelance',
+        period: '2012 – 2015',
+        description:
+            'Built and maintained a PHP-based SEO platform with 100K+ active users and a WooCommerce e-commerce shop — sole developer handling everything from dedicated server administration to production maintenance.',
+        highlights: [
+            'PHP SEO platform serving 100K+ users on dedicated servers',
+            'WooCommerce e-commerce shop — full lifecycle ownership',
+            'Hands-on production ops: server management, deployments, and plenty of unslept nights',
+            'Foundational programming experience and deep lessons from real-world issues with live users',
         ],
     },
 ]
