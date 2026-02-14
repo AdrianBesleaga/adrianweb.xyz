@@ -19,6 +19,7 @@ export default function Home() {
             <section className="hero">
                 <p className="hero-greeting">$ whoami</p>
                 <h1 className="hero-name">
+                    <img src="/profile.png" alt="Adrian Besleaga" className="profile-picture-small" />
                     Adrian <span className="accent">Besleaga</span>
                 </h1>
                 <p className="hero-tagline">

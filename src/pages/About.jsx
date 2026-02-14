@@ -14,6 +14,10 @@ export default function About() {
             </Helmet>
             <h1>About Me</h1>
 
+            <div className="about-profile">
+                <img src="/profile.png" alt="Adrian Besleaga" className="profile-picture" />
+            </div>
+
             <section className="about-intro">
                 <p>
                     Hi, I'm <strong>Adrian Besleaga</strong> — a full-stack developer and
