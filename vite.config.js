@@ -9,6 +9,7 @@ export default defineConfig({
       routes: [
         '/',
         '/blog',
+        '/blog/open-sourcing-docschema',
         '/blog/piwi-and-the-agentic-economy',
         '/blog/building-piwi-ai',
         '/about',

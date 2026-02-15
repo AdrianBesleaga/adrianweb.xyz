@@ -1,5 +1,11 @@
 [
     {
+        "slug": "open-sourcing-docschema",
+        "title": "Open-Sourcing DocSchema — Why I'm Giving Away the Knowledge Layer",
+        "date": "2026-02-15",
+        "excerpt": "DocSchema is an open standard that defines what data lives inside business documents. Here's why I open-sourced it, and how agentic AI coding made it possible."
+    },
+    {
         "slug": "piwi-and-the-agentic-economy",
         "title": "Piwi and the Agentic Economy",
         "date": "2026-02-15",

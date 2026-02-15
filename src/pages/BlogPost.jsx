@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import posts from '../data/posts.json'
-import MatrixText from '../components/MatrixText'
+
 import AuthorSidebar from '../components/AuthorSidebar'
 
 export default function BlogPost() {
@@ -71,7 +71,7 @@ export default function BlogPost() {
                     <Link to="/blog" className="post-back-link">
                         &larr; Blog
                     </Link>
-                    <h1><MatrixText text={post.title} /></h1>
+                    <h1>{post.title}</h1>
                     <div className="post-meta">
                         <time>{formatDate(post.date)}</time>
                         {readingTime && (

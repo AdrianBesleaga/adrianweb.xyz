@@ -561,53 +561,9 @@ main.container {
     font-size: 2.4rem;
     line-height: 1.2;
     letter-spacing: -0.03em;
-}
-
-.matrix-text .matrix-char {
-    display: inline;
-    transition: color 0.15s, text-shadow 0.15s;
-}
-
-/* Active frontier — the character currently being decoded */
-.matrix-text .matrix-char.frontier {
-    color: #ffffff;
-    text-shadow:
-        0 0 8px rgba(86, 211, 100, 0.9),
-        0 0 20px rgba(86, 211, 100, 0.7),
-        0 0 40px rgba(86, 211, 100, 0.4);
-}
-
-/* Still scrambling — dim green */
-.matrix-text .matrix-char.scrambling {
-    color: rgba(86, 211, 100, 0.5);
-    text-shadow: 0 0 4px rgba(86, 211, 100, 0.2);
-}
-
-/* Trail: just resolved — bright green with strong glow */
-.matrix-text .matrix-char.trail-hot {
     color: #56d364;
-    text-shadow:
-        0 0 8px rgba(86, 211, 100, 0.8),
-        0 0 16px rgba(86, 211, 100, 0.4);
 }
 
-/* Trail: fading — medium green */
-.matrix-text .matrix-char.trail-warm {
-    color: rgba(86, 211, 100, 0.7);
-    text-shadow: 0 0 6px rgba(86, 211, 100, 0.3);
-}
-
-/* Trail: almost resolved — faint green tint */
-.matrix-text .matrix-char.trail-fade {
-    color: rgba(200, 230, 210, 0.85);
-    text-shadow: 0 0 4px rgba(86, 211, 100, 0.15);
-}
-
-/* Fully resolved — clean white with very subtle green hint */
-.matrix-text .matrix-char.resolved {
-    color: var(--text);
-    text-shadow: 0 0 4px rgba(86, 211, 100, 0.1);
-}
 
 .blog-post .post-meta {
     display: flex;

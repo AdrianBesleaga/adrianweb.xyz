@@ -91,23 +91,13 @@ The A2A bridge is lightweight — it translates between A2A's JSON-RPC format an
 
 ### 3. DocSchema — An Open Standard for Document Intelligence
 
-Here's where it gets interesting beyond just protocols.
+For agents to process documents intelligently, they need **shared knowledge** — what fields exist on an Italian identity card, what clauses matter in a rental agreement, what line items an invoice should have.
 
-For agents to process documents intelligently, they need to know **what to look for** — what fields exist on an Italian identity card, what clauses matter in a rental agreement, what line items an invoice should have.
+We've open-sourced this knowledge layer as **[DocSchema](https://github.com/piwi-ai/docSchema)** — a standardized, LLM-agnostic format for defining document types, entity schemas, extraction rules, and cross-document validation logic. It ships with pre-built configurations for five business verticals across Italy and the US.
 
-We've open-sourced this knowledge layer as **[DocSchema](https://github.com/piwi-ai/business-schema-configurations)** — a standardized format for defining document types, entity schemas, extraction rules, and validation logic.
+Why does this matter for the agentic economy? Because if a procurement agent in Company A sends an invoice to Piwi, and a compliance agent in Company B sends the same kind of document, they should get the same schema, the same field definitions, the same validation rules. DocSchema is that shared standard.
 
-DocSchema isn't just PIWI's internal configuration leaked out. It's a **formal specification** with:
-
-- **Document Type definitions** — what fields to extract, what types they are, what's required
-- **Entity Type definitions** — people, companies, addresses with aggregation rules for cross-document linking
-- **Conditional Requirements** — "if document type is X, then field Y is mandatory"
-- **Workflows** — multi-step processing pipelines with node-level configuration
-- **A JSON meta-schema** — any DocSchema config can be machine-validated
-
-Why does this matter for the agentic economy? Because **agents need shared knowledge**. If a procurement agent in Company A sends a document to Piwi, and a compliance agent in Company B sends the same kind of document, they should get the same schema, the same field definitions, the same validation rules. DocSchema is that shared standard.
-
-It's published as an [npm package](https://www.npmjs.com/package/@piwi.ai/business-schema-configurations), it has a CONTRIBUTING.md for community additions, and issue templates for adding new countries and verticals. We want the community to own the *what* — what document types exist, what fields they have — while Piwi handles the *how* — the AI engine that processes them.
+I wrote a [dedicated post about why I open-sourced DocSchema](/blog/open-sourcing-docschema) and how agentic AI coding made it possible.
 
 ---
 
