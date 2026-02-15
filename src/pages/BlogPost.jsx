@@ -58,14 +58,60 @@ export default function BlogPost() {
         <div className="blog-post-layout">
             <article className="blog-post">
                 <Helmet>
+                    {/* Primary */}
                     <title>{post.title} — Adrian Besleaga</title>
                     <meta name="description" content={post.excerpt} />
+                    <meta name="author" content="Adrian Besleaga" />
+                    <meta name="robots" content="index, follow" />
+                    <link rel="canonical" href={`https://adrianweb.xyz/blog/${post.slug}`} />
+
+                    {/* Open Graph */}
                     <meta property="og:title" content={post.title} />
                     <meta property="og:description" content={post.excerpt} />
                     <meta property="og:type" content="article" />
                     <meta property="og:url" content={`https://adrianweb.xyz/blog/${post.slug}`} />
+                    <meta property="og:site_name" content="Adrian Besleaga" />
+                    <meta property="og:locale" content="en_US" />
+                    <meta property="og:image" content="https://adrianweb.xyz/profile.png" />
+                    <meta property="og:image:alt" content={post.title} />
+                    <meta property="og:image:width" content="512" />
+                    <meta property="og:image:height" content="512" />
                     <meta property="article:published_time" content={post.date} />
-                    <link rel="canonical" href={`https://adrianweb.xyz/blog/${post.slug}`} />
+                    <meta property="article:author" content="https://adrianweb.xyz/about" />
+
+                    {/* Twitter / X */}
+                    <meta name="twitter:card" content="summary" />
+                    <meta name="twitter:title" content={post.title} />
+                    <meta name="twitter:description" content={post.excerpt} />
+                    <meta name="twitter:image" content="https://adrianweb.xyz/profile.png" />
+                    <meta name="twitter:image:alt" content={post.title} />
+
+                    {/* JSON-LD Structured Data */}
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'BlogPosting',
+                            headline: post.title,
+                            description: post.excerpt,
+                            url: `https://adrianweb.xyz/blog/${post.slug}`,
+                            datePublished: post.date,
+                            image: 'https://adrianweb.xyz/profile.png',
+                            author: {
+                                '@type': 'Person',
+                                name: 'Adrian Besleaga',
+                                url: 'https://adrianweb.xyz/about',
+                            },
+                            publisher: {
+                                '@type': 'Person',
+                                name: 'Adrian Besleaga',
+                                url: 'https://adrianweb.xyz',
+                            },
+                            mainEntityOfPage: {
+                                '@type': 'WebPage',
+                                '@id': `https://adrianweb.xyz/blog/${post.slug}`,
+                            },
+                        })}
+                    </script>
                 </Helmet>
                 <header className="post-header">
                     <Link to="/blog" className="post-back-link">
