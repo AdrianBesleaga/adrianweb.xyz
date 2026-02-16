@@ -147,7 +147,7 @@ Imagine a real estate transaction where:
 - A compliance agent cross-references extracted entities (people, addresses, property details) across all documents
 - A verification agent flags inconsistencies before a human notary sees them
 
-Each agent is specialized. Each uses open protocols. And the small notary office in Milan gets the same capability that used to require a department of 20 people.
+Each agent is specialized. Each uses open protocols.
 
 That's the agentic economy. That's what we're building for. And if you're building a product today — whether it's document processing, accounting, HR, or anything else — **you should be preparing for it too**.
 
