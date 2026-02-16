@@ -9,10 +9,10 @@ export default defineConfig({
       routes: [
         '/',
         '/blog',
+        '/about',
         '/blog/open-sourcing-docschema',
         '/blog/piwi-and-the-agentic-economy',
         '/blog/building-piwi-ai',
-        '/about',
       ],
       delay: 1000,
       puppeteer: {
