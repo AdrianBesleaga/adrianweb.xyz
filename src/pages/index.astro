@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Experience from '../components/Experience.astro';
+import { getCollection } from 'astro:content';
+
+function getSlug(id: string) {
+    return id.replace(/\.md$/, '');
+}
+
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 3);
+
+const allTech = await getCollection('tech');
+const latestTech = allTech
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 3);
+
+function formatDate(date: Date) {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+}
+
+function renderStars(rating: number) {
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5 ? 1 : 0;
+    const empty = 5 - full - half;
+    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+}
+---
+
+<BaseLayout
+    title="Adrian Besleaga — Developer & Founder of Piwi.ai"
+    description="Full-stack developer and founder of Piwi.ai — building privacy-first AI document processing for small and medium businesses."
+    canonicalUrl="https://adrianweb.xyz/"
+>
+    <section class="hero">
+        <p class="hero-greeting">$ whoami</p>
+        <h1 class="hero-name">
+            <img src="/profile.png" alt="Adrian Besleaga" class="profile-picture-small" />
+            Adrian <span class="accent">Besleaga</span>
+        </h1>
+        <p class="hero-tagline">
+            Founder of Piwi.ai &middot; AWS Certified &middot; Contractor
+        </p>
+        <p class="hero-intro">
+            I build scalable systems with Java, Spring, React, TypeScript, and
+            cloud-native technologies. Currently building an affordable, privacy-first
+            IDP platform at Piwi.ai.
+        </p>
+        <div class="hero-actions">
+            <a href="https://www.linkedin.com/in/adrian-besleaga/" class="btn btn-primary" target="_blank" rel="noreferrer">
+                LinkedIn
+            </a>
+            <a href="https://github.com/AdrianBesleaga" class="btn btn-outline" target="_blank" rel="noreferrer">
+                GitHub
+            </a>
+            <a href="https://www.credly.com/badges/24f69965-8aa4-4d09-9336-a4e487292704/public_url" class="btn btn-outline" target="_blank" rel="noreferrer">
+                AWS Certified ☁️
+            </a>
+        </div>
+    </section>
+
+    {latestTech.length > 0 && (
+        <section class="latest-posts">
+            <h2 class="section-title">Tech</h2>
+            <div class="reviews-grid">
+                {latestTech.map((item) => (
+                    <a href={`/tech/${getSlug(item.id)}`} class="review-card">
+                        <div class="review-card-header">
+                            <h3>{item.data.name}</h3>
+                            <span class="review-rating">{renderStars(item.data.rating)} {item.data.rating}</span>
+                        </div>
+                        <p class="review-tagline">{item.data.tagline}</p>
+                        <div class="review-categories">
+                            {item.data.category.slice(0, 3).map((cat) => (
+                                <span class="review-category-tag">{cat}</span>
+                            ))}
+                        </div>
+                    </a>
+                ))}
+            </div>
+            <a href="/tech" class="view-all">
+                View all tech &rarr;
+            </a>
+        </section>
+    )}
+
+    <section class="latest-posts">
+        <h2 class="section-title">Latest Posts</h2>
+        <ul class="post-list">
+            {latestPosts.map((post) => (
+                <li class="post-item">
+                    <span class="post-date">{formatDate(post.data.date)}</span>
+                    <h3>
+                        <a href={`/blog/${getSlug(post.id)}`}>{post.data.title}</a>
+                    </h3>
+                    <p class="post-excerpt">{post.data.excerpt}</p>
+                </li>
+            ))}
+        </ul>
+        <a href="/blog" class="view-all">
+            View all posts &rarr;
+        </a>
+    </section>
+
+    <section class="skills">
+        <h2 class="section-title">What I Work With</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">☁️</div>
+                <h3>Cloud & Infrastructure</h3>
+                <p>AWS, Docker, CI/CD, Infrastructure as Code</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚙️</div>
+                <h3>Backend</h3>
+                <p>Java, Spring Boot, REST APIs, GraphQL, Microservices</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🗄️</div>
+                <h3>Data</h3>
+                <p>Elasticsearch, MongoDB, Redis, PostgreSQL</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🖥️</div>
+                <h3>Frontend & Runtime</h3>
+                <p>React, TypeScript, Node.js, Next.js</p>
+            </div>
+        </div>
+    </section>
+
+    <Experience />
+</BaseLayout>

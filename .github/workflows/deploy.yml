@@ -28,9 +28,9 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci --legacy-peer-deps
-      - run: npx puppeteer browsers install chrome
-      - run: npm run build
+      - run: npm ci
+
+      - uses: withastro/action@v3
 
       - uses: actions/configure-pages@v5
 

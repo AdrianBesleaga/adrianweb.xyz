@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorSidebar from '../../components/AuthorSidebar.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+    const items = await getCollection('tech');
+    return items.map((item) => ({
+        params: { slug: item.id.replace(/\.md$/, '') },
+        props: { item },
+    }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const slug = item.id.replace(/\.md$/, '');
+
+function formatDate(date: Date) {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+}
+
+function renderStars(rating: number) {
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5 ? 1 : 0;
+    const empty = 5 - full - half;
+    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+}
+
+const pricingLabel = item.data.openSource
+    ? 'Open Source'
+    : item.data.pricing.hasFree
+        ? 'Free plan available'
+        : item.data.pricing.startsAt
+            ? `From $${item.data.pricing.startsAt}/${item.data.pricing.currency === 'USD' ? 'mo' : item.data.pricing.currency}`
+            : 'Contact for pricing';
+
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    name: `${item.data.name} Review`,
+    itemReviewed: {
+        '@type': 'SoftwareApplication',
+        name: item.data.name,
+        url: item.data.website,
+    },
+    reviewRating: {
+        '@type': 'Rating',
+        ratingValue: item.data.rating,
+        bestRating: 5,
+    },
+    author: {
+        '@type': 'Person',
+        name: 'Adrian Besleaga',
+        url: 'https://adrianweb.xyz/about',
+    },
+    datePublished: item.data.date.toISOString(),
+    url: `https://adrianweb.xyz/tech/${slug}`,
+};
+---
+
+<BaseLayout
+    title={`${item.data.name} — Adrian Besleaga`}
+    description={`In-depth analysis of ${item.data.name}: ${item.data.tagline}. ${item.data.verdict.bestFor}.`}
+    canonicalUrl={`https://adrianweb.xyz/tech/${slug}`}
+    ogType="article"
+    wide={true}
+    article={{ publishedTime: item.data.date.toISOString(), author: 'https://adrianweb.xyz/about' }}
+    jsonLd={jsonLd}
+>
+    <div class="blog-post-layout">
+        <article class="blog-post">
+            <header class="review-header">
+                <a href="/tech" class="post-back-link">
+                    &larr; Tech
+                </a>
+                <h1>{item.data.name}</h1>
+                <p class="review-tagline">{item.data.tagline}</p>
+                <div class="review-meta">
+                    <span class="review-rating">{renderStars(item.data.rating)} {item.data.rating}/5</span>
+                    <span class="pricing-badge">{pricingLabel}</span>
+                    <time>Reviewed {formatDate(item.data.date)}</time>
+                    <span>Verified {formatDate(item.data.lastVerified)}</span>
+                </div>
+            </header>
+
+            <div class="verdict-box">
+                <h3>⚡ Quick Verdict</h3>
+                <div class="verdict-item">
+                    <strong>Best for:</strong>
+                    <p>{item.data.verdict.bestFor}</p>
+                </div>
+                <div class="verdict-item">
+                    <strong>Not for:</strong>
+                    <p>{item.data.verdict.notFor}</p>
+                </div>
+            </div>
+
+            {(item.data.pros || item.data.cons) && (
+                <div class="pros-cons">
+                    {item.data.pros && item.data.pros.length > 0 && (
+                        <div class="pros-list">
+                            <h3>Pros</h3>
+                            <ul>
+                                {item.data.pros.map((pro) => <li>{pro}</li>)}
+                            </ul>
+                        </div>
+                    )}
+                    {item.data.cons && item.data.cons.length > 0 && (
+                        <div class="cons-list">
+                            <h3>Cons</h3>
+                            <ul>
+                                {item.data.cons.map((con) => <li>{con}</li>)}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            )}
+
+            {item.data.affiliateUrl && (
+                <a href={item.data.affiliateUrl} class="affiliate-cta" target="_blank" rel="nofollow noreferrer">
+                    Try {item.data.name} →
+                </a>
+            )}
+
+            <div class="post-body">
+                <Content />
+            </div>
+
+            <footer class="post-footer">
+                <a href="/tech" class="btn btn-outline">
+                    &larr; Back to all tech
+                </a>
+            </footer>
+        </article>
+        <AuthorSidebar />
+    </div>
+</BaseLayout>

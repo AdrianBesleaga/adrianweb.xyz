@@ -1,3 +1,132 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogType?: string;
+  ogImage?: string;
+  wide?: boolean;
+  article?: {
+    publishedTime?: string;
+    author?: string;
+  };
+  jsonLd?: object;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  ogType = 'website',
+  ogImage = 'https://adrianweb.xyz/profile.png',
+  wide = false,
+  article,
+  jsonLd,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Adrian Besleaga" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Adrian Besleaga" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:locale" content="en_US" />
+    {article?.publishedTime && <meta property="article:published_time" content={article.publishedTime} />}
+    {article?.author && <meta property="article:author" content={article.author} />}
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+    />
+
+    {jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    <title>{title}</title>
+</head>
+<body>
+    <div class="app">
+        <header class="navbar">
+            <div class="container navbar-inner">
+                <a href="/" class="navbar-brand">
+                    <span class="brand-accent">{'>'}</span> adrian<span class="brand-accent">web</span>
+                </a>
+
+                <button class="hamburger" aria-label="Toggle menu" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="navbar-links" id="menu-nav">
+                    <a href="/" class:list={[{ active: Astro.url.pathname === '/' }]}>Home</a>
+                    <a href="/blog" class:list={[{ active: Astro.url.pathname.startsWith('/blog') }]}>Blog</a>
+                    <a href="/tech" class:list={[{ active: Astro.url.pathname.startsWith('/tech') }]}>Tech</a>
+                    <a href="/about" class:list={[{ active: Astro.url.pathname === '/about/' || Astro.url.pathname === '/about' }]}>About</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class={wide ? 'container-wide' : 'container'}>
+            <slot />
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>
+                    &copy; {new Date().getFullYear()} Adrian Besleaga &middot; Built with Astro
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const toggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('menu-nav');
+        toggle?.addEventListener('click', () => {
+            toggle.classList.toggle('open');
+            nav?.classList.toggle('open');
+        });
+        // Close menu when clicking a link
+        nav?.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggle?.classList.remove('open');
+                nav?.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
+
+<style is:global>
 /* ===== Reset & Base ===== */
 *,
 *::before,
@@ -27,7 +156,7 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
@@ -35,7 +164,7 @@ body {
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -70,6 +199,13 @@ main.container {
     flex: 1;
     padding-top: 2rem;
     padding-bottom: 4rem;
+}
+
+main.container-wide {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
 }
 
 /* ===== Navbar ===== */
@@ -157,53 +293,6 @@ main.container {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ===== Hero ===== */
-.hero {
-    padding: 3rem 0 2rem;
-}
-
-.hero-greeting {
-    font-size: 1.1rem;
-    color: var(--accent-green);
-    font-family: var(--font-mono);
-    margin-bottom: 0.25rem;
-}
-
-.hero-name {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.03em;
-}
-
-.accent {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-tagline {
-    color: var(--text-muted);
-    font-size: 1.15rem;
-    margin-bottom: 1rem;
-}
-
-.hero-intro {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    max-width: 550px;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-}
-
 /* ===== Buttons ===== */
 .btn {
     display: inline-flex;
@@ -250,6 +339,53 @@ main.container {
     font-weight: 700;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
+}
+
+/* ===== Hero ===== */
+.hero {
+    padding: 3rem 0 2rem;
+}
+
+.hero-greeting {
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+    margin-bottom: 0.25rem;
+}
+
+.hero-name {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.03em;
+}
+
+.accent {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-tagline {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+}
+
+.hero-intro {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 550px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 /* ===== Skills Grid ===== */
@@ -440,11 +576,6 @@ main.container {
     display: flex;
     gap: 2.5rem;
     align-items: flex-start;
-    width: 100vw;
-    max-width: 1200px;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    padding: 0 2rem;
 }
 
 .blog-post-layout .blog-post {
@@ -563,7 +694,6 @@ main.container {
     letter-spacing: -0.03em;
     color: #56d364;
 }
-
 
 .blog-post .post-meta {
     display: flex;
@@ -844,6 +974,255 @@ main.container {
     font-size: 0.85rem;
 }
 
+/* ===== Reviews ===== */
+.reviews-page h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.reviews-description {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.review-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color var(--transition), transform var(--transition), background var(--transition);
+    text-decoration: none;
+    display: block;
+}
+
+.review-card:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-3px);
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.review-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+}
+
+.review-rating {
+    color: #f5a623;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.review-tagline {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 0.75rem;
+}
+
+.review-categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.review-category-tag {
+    background: rgba(86, 211, 100, 0.1);
+    color: var(--accent-green);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    font-weight: 500;
+}
+
+/* ===== Review Detail Page ===== */
+.review-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.review-header h1 {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #56d364;
+    margin-bottom: 0.5rem;
+}
+
+.review-header .review-tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    font-family: var(--font-mono);
+    flex-wrap: wrap;
+}
+
+.verdict-box {
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.verdict-box h3 {
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+}
+
+.verdict-item {
+    margin-bottom: 0.75rem;
+}
+
+.verdict-item strong {
+    color: var(--text);
+}
+
+.verdict-item p {
+    color: var(--text-muted);
+    font-size: 0.93rem;
+    margin: 0.25rem 0 0;
+}
+
+.pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.pros-list, .cons-list {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+}
+
+.pros-list h3 {
+    color: var(--accent-green);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.cons-list h3 {
+    color: #f85149;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.pros-list ul, .cons-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pros-list li, .cons-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 0.3rem;
+}
+
+.pros-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: 700;
+}
+
+.cons-list li::before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+    color: #f85149;
+    font-weight: 700;
+}
+
+.affiliate-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    transition: all var(--transition);
+    margin-bottom: 2rem;
+}
+
+.affiliate-cta:hover {
+    background: #3fb950;
+    color: var(--bg);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(86, 211, 100, 0.25);
+}
+
+.pricing-badge {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    color: var(--accent-green);
+}
+
+/* ===== Compare Page ===== */
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.compare-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid var(--accent);
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.compare-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.compare-table tr:hover td {
+    background: var(--bg-card);
+    color: var(--text);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 640px) {
     .hamburger {
@@ -891,11 +1270,19 @@ main.container {
 
     .blog-post-layout {
         flex-direction: column;
-        width: auto;
-        max-width: none;
-        margin-left: 0;
-        transform: none;
-        padding: 0 1rem;
+    }
+
+    .blog-post-layout .blog-post {
+        width: 100%;
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    main.container-wide {
+        padding: 1rem 1rem 4rem;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .author-sidebar {
@@ -977,4 +1364,17 @@ main.container {
         max-width: 100%;
         height: auto;
     }
+
+    .pros-cons {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-header h1 {
+        font-size: 1.6rem;
+    }
 }
+</style>

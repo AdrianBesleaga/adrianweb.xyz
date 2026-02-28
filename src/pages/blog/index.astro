@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+function getSlug(id: string) {
+    return id.replace(/\.md$/, '');
+}
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function formatDate(date: Date) {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+}
+---
+
+<BaseLayout
+    title="Blog — Adrian Besleaga"
+    description="Articles about building Piwi.ai, TypeScript, AI-powered document processing, and the solo founder journey."
+    canonicalUrl="https://adrianweb.xyz/blog"
+>
+    <div class="blog-page">
+        <h1>Blog</h1>
+        <p class="blog-description">
+            Thoughts on Java, cloud architecture, and building software.
+        </p>
+        <ul class="post-list">
+            {sortedPosts.map((post) => (
+                <li class="post-item">
+                    <span class="post-date">{formatDate(post.data.date)}</span>
+                    <h3>
+                        <a href={`/blog/${getSlug(post.id)}`}>{post.data.title}</a>
+                    </h3>
+                    <p class="post-excerpt">{post.data.excerpt}</p>
+                </li>
+            ))}
+        </ul>
+    </div>
+</BaseLayout>
