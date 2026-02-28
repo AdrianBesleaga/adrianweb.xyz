@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorSidebar from '../../components/AuthorSidebar.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({
+        params: { slug: post.id.replace(/\.md$/, '') },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const slug = post.id.replace(/\.md$/, '');
+
+const wordCount = post.body ? post.body.split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+function formatDate(date: Date) {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+}
+
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    description: post.data.excerpt,
+    url: `https://adrianweb.xyz/blog/${slug}`,
+    datePublished: post.data.date.toISOString(),
+    image: 'https://adrianweb.xyz/profile.png',
+    author: {
+        '@type': 'Person',
+        name: 'Adrian Besleaga',
+        url: 'https://adrianweb.xyz/about',
+    },
+    publisher: {
+        '@type': 'Person',
+        name: 'Adrian Besleaga',
+        url: 'https://adrianweb.xyz',
+    },
+    mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://adrianweb.xyz/blog/${slug}`,
+    },
+};
+---
+
+<BaseLayout
+    title={`${post.data.title} — Adrian Besleaga`}
+    description={post.data.excerpt}
+    canonicalUrl={`https://adrianweb.xyz/blog/${slug}`}
+    ogType="article"
+    wide={true}
+    article={{ publishedTime: post.data.date.toISOString(), author: 'https://adrianweb.xyz/about' }}
+    jsonLd={jsonLd}
+>
+    <div class="blog-post-layout">
+        <article class="blog-post">
+            <header class="post-header">
+                <a href="/blog" class="post-back-link">
+                    &larr; Blog
+                </a>
+                <h1>{post.data.title}</h1>
+                <div class="post-meta">
+                    <time>{formatDate(post.data.date)}</time>
+                    <span class="reading-time">
+                        ☕ {readingTime} min read
+                    </span>
+                </div>
+            </header>
+
+            <div class="post-body">
+                <Content />
+            </div>
+
+            <footer class="post-footer">
+                <a href="/blog" class="btn btn-outline">
+                    &larr; Back to all posts
+                </a>
+            </footer>
+        </article>
+        <AuthorSidebar />
+    </div>
+</BaseLayout>

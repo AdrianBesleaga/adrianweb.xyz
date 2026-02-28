@@ -1,7 +1,4 @@
 /.idea/
-_site/
-.jekyll-cache/
-.jekyll-metadata
-Gemfile.lock
 node_modules/
 dist/
+.astro/

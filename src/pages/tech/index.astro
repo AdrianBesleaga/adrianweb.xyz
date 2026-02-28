@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allTech = await getCollection('tech');
+const sortedTech = allTech.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function getSlug(id: string) {
+    return id.replace(/\.md$/, '');
+}
+
+function renderStars(rating: number) {
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5 ? 1 : 0;
+    const empty = 5 - full - half;
+    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+}
+---
+
+<BaseLayout
+    title="Tech — Adrian Besleaga"
+    description="In-depth analysis of tech tools, AI platforms, protocols, and developer products. Hands-on testing, honest verdicts."
+    canonicalUrl="https://adrianweb.xyz/tech"
+>
+    <div class="reviews-page">
+        <h1>Tech</h1>
+        <p class="reviews-description">
+            In-depth analysis of tech tools and platforms. I test everything hands-on before writing about it.
+        </p>
+
+        {sortedTech.length === 0 ? (
+            <div class="blog-description">
+                <p>Tech articles coming soon! Check back shortly for in-depth analysis.</p>
+            </div>
+        ) : (
+            <div class="reviews-grid">
+                {sortedTech.map((item) => (
+                    <a href={`/tech/${getSlug(item.id)}`} class="review-card">
+                        <div class="review-card-header">
+                            <h3>{item.data.name}</h3>
+                            <span class="review-rating">{renderStars(item.data.rating)} {item.data.rating}</span>
+                        </div>
+                        <p class="review-tagline">{item.data.tagline}</p>
+                        <div class="review-categories">
+                            {item.data.category.map((cat) => (
+                                <span class="review-category-tag">{cat}</span>
+                            ))}
+                        </div>
+                    </a>
+                ))}
+            </div>
+        )}
+    </div>
+</BaseLayout>
