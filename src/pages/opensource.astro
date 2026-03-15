@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="Open Source — Adrian Besleaga"
+    description="Open-source projects and contributions by Adrian Besleaga — docSchema, WebMCP Tools, Piwi.ai offline mode, and bug reports to Hugging Face and MLC."
+    canonicalUrl="https://adrianweb.xyz/opensource"
+>
+    <div class="oss-page">
+        <header class="oss-hero">
+            <p class="hero-greeting">$ cat open-source.md</p>
+            <h1>Open <span class="accent">Source</span></h1>
+            <p class="oss-subtitle">
+                Projects I've built and contributions I've made to the developer community.
+            </p>
+        </header>
+
+        <!-- ═══════ MY PROJECTS ═══════ -->
+        <section class="oss-section">
+            <h2 class="section-title">
+                <span class="section-icon">🚀</span> My Projects
+            </h2>
+
+            <div class="oss-grid">
+                <!-- Piwi.ai Offline -->
+                <a href="https://offline.piwi.ai" target="_blank" rel="noreferrer" class="oss-card oss-card--featured">
+                    <div class="oss-card-glow"></div>
+                    <div class="oss-card-inner">
+                        <div class="oss-card-header">
+                            <span class="oss-card-icon">🤖</span>
+                            <span class="oss-card-badge">Featured</span>
+                        </div>
+                        <h3>Piwi.ai — Offline Mode</h3>
+                        <p class="oss-card-desc">
+                            An Intelligent Document Processing (IDP) platform with
+                            workflow configuration for any business — fully working
+                            offline with local AI. No cloud, no cost, no compromises.
+                        </p>
+                        <div class="oss-card-tags">
+                            <span class="oss-tag">AI</span>
+                            <span class="oss-tag">Privacy</span>
+                            <span class="oss-tag">Offline</span>
+                            <span class="oss-tag">Free</span>
+                        </div>
+                        <div class="oss-card-link">
+                            Visit piwi.ai →
+                        </div>
+                    </div>
+                </a>
+
+                <!-- docSchema -->
+                <a href="https://github.com/piwi-ai/docSchema" target="_blank" rel="noreferrer" class="oss-card">
+                    <div class="oss-card-inner">
+                        <div class="oss-card-header">
+                            <span class="oss-card-icon">📋</span>
+                        </div>
+                        <h3>docSchema</h3>
+                        <p class="oss-card-desc">
+                            An open standard for AI-readable document schemas. Define
+                            document types, entities, cross-document validations, and
+                            real-world entity links — all in a single JSON file any AI
+                            can consume.
+                        </p>
+                        <div class="oss-card-tags">
+                            <span class="oss-tag">Open Standard</span>
+                            <span class="oss-tag">TypeScript</span>
+                            <span class="oss-tag">AI</span>
+                            <span class="oss-tag">IDP</span>
+                        </div>
+                        <div class="oss-card-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            piwi-ai/docSchema →
+                        </div>
+                    </div>
+                </a>
+
+                <!-- WebMCP Tools -->
+                <a href="https://github.com/WebMCP-Tools/tools" target="_blank" rel="noreferrer" class="oss-card">
+                    <div class="oss-card-inner">
+                        <div class="oss-card-header">
+                            <span class="oss-card-icon">🔧</span>
+                        </div>
+                        <h3>WebMCP Tools</h3>
+                        <p class="oss-card-desc">
+                            Open-source tool implementations for the Web-MCP.tools
+                            platform. Self-contained tools for WordPress, Nuxeo,
+                            e-commerce, and generic websites — each with a config
+                            schema and ESM handler.
+                        </p>
+                        <div class="oss-card-tags">
+                            <span class="oss-tag">MCP</span>
+                            <span class="oss-tag">Tools</span>
+                            <span class="oss-tag">TypeScript</span>
+                            <span class="oss-tag">AI Agents</span>
+                        </div>
+                        <div class="oss-card-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            WebMCP-Tools/tools →
+                        </div>
+                    </div>
+                </a>
+
+                <!-- HomeRadarAI -->
+                <a href="https://github.com/AdrianBesleaga/better-real-estate" target="_blank" rel="noreferrer" class="oss-card">
+                    <div class="oss-card-inner">
+                        <div class="oss-card-header">
+                            <span class="oss-card-icon">🏠</span>
+                        </div>
+                        <h3>HomeRadarAI</h3>
+                        <p class="oss-card-desc">
+                            Chrome extension that turns any real estate website into a
+                            smart search experience — map view, AI-powered comparison,
+                            cross-site dedup, and priority scoring. Works in any country,
+                            100% private, no backend needed.
+                        </p>
+                        <div class="oss-card-tags">
+                            <span class="oss-tag">Chrome Extension</span>
+                            <span class="oss-tag">React</span>
+                            <span class="oss-tag">AI</span>
+                            <span class="oss-tag">Privacy</span>
+                        </div>
+                        <div class="oss-card-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            AdrianBesleaga/better-real-estate →
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ═══════ CONTRIBUTIONS ═══════ -->
+        <section class="oss-section">
+            <h2 class="section-title">
+                <span class="section-icon">🐛</span> Contributions &amp; Bug Reports
+            </h2>
+
+            <div class="oss-contrib-list">
+                <!-- transformers.js -->
+                <a href="https://github.com/huggingface/transformers.js/issues/1527" target="_blank" rel="noreferrer" class="oss-contrib-card">
+                    <div class="oss-contrib-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div class="oss-contrib-content">
+                        <div class="oss-contrib-repo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            huggingface/transformers.js
+                            <span class="oss-contrib-issue">#1527</span>
+                        </div>
+                        <h3>CDN wasmPaths breaks local dev servers</h3>
+                        <p>
+                            Filed a bug report for Transformers.js v4: the hardcoded CDN
+                            <code>wasmPaths</code> causes CORS Worker construction errors on
+                            localhost. Proposed a fix to only default to CDN when not on a
+                            local dev server, and provided a working workaround using
+                            <code>vite-plugin-static-copy</code>.
+                        </p>
+                        <div class="oss-card-tags">
+                            <span class="oss-tag oss-tag--bug">Bug Report</span>
+                            <span class="oss-tag">CORS</span>
+                            <span class="oss-tag">WASM</span>
+                            <span class="oss-tag">Vite</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- web-llm -->
+                <a href="https://github.com/mlc-ai/web-llm/issues/727#issuecomment-3659839763" target="_blank" rel="noreferrer" class="oss-contrib-card">
+                    <div class="oss-contrib-icon oss-contrib-icon--discussion">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div class="oss-contrib-content">
+                        <div class="oss-contrib-repo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            mlc-ai/web-llm
+                            <span class="oss-contrib-issue">#727</span>
+                        </div>
+                        <h3>Getting vision models to work in the browser</h3>
+                        <p>
+                            Contributed to the discussion on getting vision models (Phi 3.5,
+                            Gemma 3) running in the browser via WebGPU. Shared findings on
+                            model compilation, cache management, and runtime configuration
+                            to help the community resolve vision model support.
+                        </p>
+                        <div class="oss-card-tags">
+                            <span class="oss-tag oss-tag--discussion">Discussion</span>
+                            <span class="oss-tag">Vision AI</span>
+                            <span class="oss-tag">WebGPU</span>
+                            <span class="oss-tag">Browser ML</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+</BaseLayout>
