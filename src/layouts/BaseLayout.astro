@@ -104,7 +104,7 @@ const {
         <footer class="site-footer">
             <div class="container">
                 <p>
-                    &copy; {new Date().getFullYear()} Adrian Besleaga &middot; Built with Astro
+                    &copy; {new Date().getFullYear()} Adrian Besleaga
                 </p>
             </div>
         </footer>
@@ -1663,6 +1663,16 @@ main.container-wide {
     transform: translateY(-3px);
     box-shadow: 0 8px 30px rgba(86, 211, 100, 0.08);
     color: var(--text);
+}
+
+.talk-card-gallery {
+    display: flex;
+    gap: 0;
+}
+
+.talk-card-gallery .talk-card-image {
+    flex: 1;
+    min-width: 0;
 }
 
 .talk-card-image {
