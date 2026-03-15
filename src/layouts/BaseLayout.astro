@@ -91,6 +91,7 @@ const {
                     <a href="/blog" class:list={[{ active: Astro.url.pathname.startsWith('/blog') }]}>Blog</a>
                     <a href="/tech" class:list={[{ active: Astro.url.pathname.startsWith('/tech') }]}>Tech</a>
                     <a href="/opensource" class:list={[{ active: Astro.url.pathname === '/opensource/' || Astro.url.pathname === '/opensource' }]}>Open Source</a>
+                    <a href="/talks" class:list={[{ active: Astro.url.pathname === '/talks/' || Astro.url.pathname === '/talks' }]}>Talks</a>
                     <a href="/about" class:list={[{ active: Astro.url.pathname === '/about/' || Astro.url.pathname === '/about' }]}>About</a>
                 </nav>
             </div>
@@ -1631,5 +1632,106 @@ main.container-wide {
     border-radius: 4px;
     border: 1px solid var(--border);
     color: var(--accent-green);
+}
+
+/* ===== Talks Page ===== */
+.talks-page {
+    padding-bottom: 2rem;
+}
+
+.talks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.talk-card {
+    position: relative;
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color var(--transition), transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.talk-card:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(86, 211, 100, 0.08);
+    color: var(--text);
+}
+
+.talk-card-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.talk-card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-gradient);
+}
+
+.talk-card-inner {
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+}
+
+.talk-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.talk-location {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--accent-green);
+}
+
+.talk-year {
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+}
+
+.talk-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+}
+
+.talk-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.talk-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent-green);
+    font-family: var(--font-mono);
 }
 </style>
